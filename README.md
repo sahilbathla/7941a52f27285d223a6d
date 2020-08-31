@@ -29,4 +29,4 @@ Included specs
 
 # Contribute
 
-Please reach out to me at `sahilbathla1@gmail.com`
+Please reach out to me at `sahil@avantinfotechnologies.com`
