@@ -1,0 +1,14 @@
+<% if @questions.any? %>
+  <% @questions.each do |question| %>
+    <div>
+      <%= link_to question.description, question_path(question), class: 'question' %>
+    </div>
+  <% end %>
+<% else %>
+  <p> No questions created so far. <p>
+<% end %>
+<%= form_with url: questions_path, method: :post do %>
+  <textarea name="description"></textarea>
+  <p>Topic - <%= select_tag('topic_id', options_from_collection_for_select(Topic.all, :id, :name)) %></p>
+  <button>Ask</button>
+<% end %>

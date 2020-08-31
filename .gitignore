@@ -1,0 +1,6 @@
+log/
+tmp/
+.byebug_history
+config/*.yml
+
+

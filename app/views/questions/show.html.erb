@@ -1,0 +1,42 @@
+<div>
+  <p>Description - <%= @question.description %> </p>
+  <p>
+    <%= form_with url: user_topics_path, method: :post do %>
+      <span>Topic - <%= @question.topic.name %></span>
+      <input type="hidden" value="<%= @question.topic.id %>" name="topic_id"/>
+      <button class="follow_topic">Follow Topic</button>
+       <% if current_user.following_topic?(@question.topic)  %>
+         <span>✓</span>
+        <% end %>
+    <% end %>
+  </p>
+  <p>
+    <% if current_user != @author %>
+      <%= form_with url: user_followings_path, method: :post do %>
+        <span>Author - <%= @author.email %></span>
+        <input type="hidden" value="<%= @author.id %>" name="following_id"/>
+        <button class="follow_user">Follow User</button>
+        <% if current_user.following?(@author)  %>
+          <span>✓</span>
+        <% end %>
+      <% end %>
+    <% else %>
+      <span>Author - You</span>
+      <button class="follow_user" disabled>You can't follow yourself</button>
+    <% end %>
+  </p>
+  <p>
+    <% @question.answers.each_with_index do |answer, index| %>
+      <div class="answer">
+        <strong> Answer #<%= index + 1 %></strong>
+        <p><%= answer.description %></p>
+        <p> BY - <%= user_email(answer.user) %> </p>
+      </div>
+    <% end %>
+    <%= form_with url: answers_path, method: :post do %>
+      <textarea name="description"></textarea>
+      <input type="hidden" value="<%= @question.id %>" name="question_id"/>
+      <button>Answer</button>
+    <% end %>
+  </p>
+</div>
